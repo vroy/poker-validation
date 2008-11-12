@@ -39,7 +39,7 @@ Everything needed to make a poker game. Includes: Deck, Card, Hand and Table. Yo
   deck.suits # => an array with the suit of each card
 
 
-== Table
+=== Table
   Poker::Table.new(4) # => Poker::Table
   
   Poker::Table.new(4).winner # => winning Poker::Hand
