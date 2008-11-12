@@ -1,0 +1,45 @@
+= Poker Validation
+
+== Author
+
+Vincent Roy (vincentroy8 at gmail dot com)
+
+== Description
+Everything needed to make a poker game. Includes: Deck, Card, Hand and Table. You can compare hands and cards.
+
+== Examples
+
+=== Card
+  Poker::Card.new(10) # => Poker::Card representing 4H
+
+=== Hand
+  hand = Poker::Hand.new # => empty hand
+  
+  hand << Card.new(10) # => add a card to the hand
+  
+  Poker::Hand.new(*deck[0..4]) # => creates a new hand with the first 5 cards of a deck
+
+=== Deck
+  deck = Deck.new(Card.new(0), Card.new(1)) # => deck of size 2 with the specified cards
+  
+  deck = Deck.new(30) # => shuffled deck with only 30 cards
+  
+  deck = Deck.new # => shuffled deck with 52 cards
+  
+  deck.sort # => the sorted deck
+  deck.sort! # => the sorted deck
+  
+  deck.shuffle # => the shuffled deck
+  deck.shuffle! # => the shuffled deck
+  
+  deck.deal(4) # => an array of 4 Poker::Hand objects
+  
+  deck.ids # => an array with the id of each card
+  deck.numbers # => an array with the number of each card
+  deck.suits # => an array with the suit of each card
+
+
+== Table
+  Poker::Table.new(4) # => Poker::Table
+  
+  Poker::Table.new(4).winner # => winning Poker::Hand
