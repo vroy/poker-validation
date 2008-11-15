@@ -2,13 +2,13 @@ module Poker
   class Card
   
     Suits = {
-      0 => "Club",
-      1 => "Diamond",
-      2 => "Heart",
-      3 => "Spades",
+      0 => "C",
+      1 => "D",
+      2 => "H",
+      3 => "S",
     }
     
-    Faces = {
+    Numbers = {
       2 => '2',
       3 => '3',
       4 => '4',
@@ -37,12 +37,9 @@ module Poker
         @id = ((arg[:number] - 2) * 4) + arg[:suit]
         
       elsif arg.class == String
-        face, suit_str = arg.split("")
+        num, suit = arg.split("")
         
-        number = Faces.select { |k, v| v == face }.first.first
-        suit = Suits.select { |k, v| v[0].chr.downcase == suit_str.downcase }.first.first
-        
-        @id = Card.new(:number => number, :suit => suit).id
+        @id = Card.new(:number => Numbers.index(num), :suit => Suits.index(suit.upcase)).id
         
       else
         @id = 0
@@ -68,7 +65,7 @@ module Poker
     end
     
     def to_s
-      Faces[@number][0].chr + Suits[@suit][0].chr
+      Numbers[@number][0].chr + Suits[@suit][0].chr
     end
     
     def inspect
