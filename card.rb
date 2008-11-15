@@ -31,7 +31,7 @@ module Poker
     # Poker::Card.new("2C") # => 2C
     def initialize(arg)
       if arg.class == Fixnum
-        @id = args.first
+        @id = arg
         
       elsif arg.class == Hash and arg[:number] and arg[:suit]
         @id = ((arg[:number] - 2) * 4) + arg[:suit]
@@ -39,7 +39,8 @@ module Poker
       elsif arg.class == String
         num, suit = arg.split("")
         
-        @id = Card.new(:number => Numbers.index(num), :suit => Suits.index(suit.upcase)).id
+        @id = Card.new(:number => Numbers.index(num),
+                       :suit   => Suits.index(suit.upcase)).id
         
       else
         @id = 0
