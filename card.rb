@@ -30,7 +30,10 @@ module Poker
     # Poker::Card.new(:number => 2, :suit => 0) # => 2C
     # Poker::Card.new("2C") # => 2C
     def initialize(arg)
-      if arg.class == Fixnum
+      if arg.class == Poker::Card
+        @id = arg.id
+      
+      elsif arg.class == Fixnum
         @id = arg
         
       elsif arg.class == Hash and arg[:number] and arg[:suit]
@@ -52,13 +55,7 @@ module Poker
     end
     
     def <=>(other_card)
-      if @number < other_card.number
-        return -1
-      elsif @number > other_card.number
-        return 1
-      else
-        return 0
-      end
+      @number <=> other_card.number
     end
     
     def ==(other_card)
