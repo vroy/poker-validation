@@ -53,7 +53,7 @@ module Poker
         end
       end
       
-      hands.sort.map { |id, hand| hand }
+      hands.values.sort
     end
     
     def ids;     self.map { |c| c.id }.sort; end
