@@ -26,10 +26,31 @@ module Poker
     
     attr_reader :id, :suit, :number
     
-    def initialize(id)
-      @id = id
-      @number = id / 4 + 2 # used to make cards from 2 to 14
-      @suit = id % 4
+    # Poker::Card.new(0) # => 2C
+    # Poker::Card.new(:number => 2, :suit => 0) # => 2C
+    # Poker::Card.new("2C") # => 2C
+    def initialize(arg)
+      if arg.class == Fixnum
+        @id = args.first
+        
+      elsif arg.class == Hash and arg[:number] and arg[:suit]
+        @id = ((arg[:number] - 2) * 4) + arg[:suit]
+        
+      elsif arg.class == String
+        face, suit_str = arg.split("")
+        
+        number = Faces.select { |k, v| v == face }.first.first
+        suit = Suits.select { |k, v| v[0].chr.downcase == suit_str.downcase }.first.first
+        
+        @id = Card.new(:number => number, :suit => suit).id
+        
+      else
+        @id = 0
+        
+      end
+      
+      @number = @id / 4 + 2 
+      @suit = @id % 4
     end
     
     def <=>(other_card)
@@ -55,3 +76,5 @@ module Poker
     end
   end
 end
+
+
