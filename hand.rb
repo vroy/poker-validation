@@ -14,17 +14,29 @@ module Poker
               0 => :empty,
             }
 
-    def initialize(*cards)
-      cards.each { |c| self << c }
-    end
-
-    def rank
-      Ranks[rank_number]
+    # Poker::Hand.new
+    # Poker::Hand.new(Poker::Card.new("2C"), Poker::Card.new("2D"))
+    # Poker::Hand.new([Poker::Card.new("2C"), Poker::Card.new("2D")])
+    # Poker::Hand.new("2C 2D")
+    # Poker::Hand.new("2C", "2D")
+    # Poker::Hand.new(["2C", "2D"])
+    def initialize(*args)
+      args.flatten.each do |c|
+        if c.class == Poker::Card
+          self << c
+          
+        else # Assume it's a string
+          c.split(" ").each do |card|
+            self << Card.new(card)
+          end
+          
+        end
+      end
     end
     
-    def rank_number
+    def rank
       Ranks.sort.reverse.each { |rank, symbol| return rank if self.send("#{symbol}?") }
-      0
+      :empty
     end
     
     def <=>(other_hand)
@@ -61,6 +73,7 @@ module Poker
 
       pairs
     end
+    
   end
 end
 

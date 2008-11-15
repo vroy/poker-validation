@@ -10,15 +10,21 @@ Everything needed to make a poker game. Includes: Deck, Card, Hand and Table. Yo
 == Examples
 
 === Card
-  Poker::Card.new(10) # => Poker::Card representing 4H
+  Poker::Card.new(0) # => 2C
+  Poker::Card.new(:number => 2, :suit => 0) # => 2C
+  Poker::Card.new("2C") # => 2C
+  
 
 === Hand
-  hand = Poker::Hand.new # => empty hand
+  Poker::Hand.new
+  Poker::Hand.new(Poker::Card.new("2C"), Poker::Card.new("2D"))
+  Poker::Hand.new([Poker::Card.new("2C"), Poker::Card.new("2D")])
+  Poker::Hand.new("2C 2D")
+  Poker::Hand.new("2C", "2D")
+  Poker::Hand.new(["2C", "2D"])
   
-  hand << Card.new(10) # => add a card to the hand
+  hand << Card.new(10)
   
-  Poker::Hand.new(*deck[0..4]) # => creates a new hand with the first 5 cards of a deck
-
 === Deck
   deck = Deck.new(Card.new(0), Card.new(1)) # => deck of size 2 with the specified cards
   
