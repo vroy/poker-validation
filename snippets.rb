@@ -4,8 +4,8 @@ class Array
     0.upto(to) { |i| yield i, self[i] }
   end
   
-  # Returns true if values are a sequence
-  def following(diff=1)
+  # Returns true if values are a sequence with an interval of diff
+  def sequence?(diff=1)
     tmp = self.sort
     
     tmp.upto(tmp.size-2) do |i, val|

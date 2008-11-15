@@ -42,7 +42,7 @@ module Poker
     def four_of_a_kind?;  pairs(4).size == 1;                           end
     def full_house?;      pairs(3).size == 1 && pairs(2).size == 1;     end
     def flush?;           suits.uniq.size == 1;                         end
-    def straight?;        numbers.following;                            end
+    def straight?;        numbers.sequence?;                            end
     def pair?;            pairs(2).size == 1; end
     def two_pairs?;       pairs(2).size == 2; end
     def three_of_a_kind?; pairs(3).size == 1; end
